@@ -5,6 +5,9 @@ const validator = require("../utils/validator");
 const createAuthor = async function (req, res) {
   try {
     let requestBody = req.body;
+    //
+    //console.log(requestBody)
+    //
 
     if (!validator.isValidRequestBody(requestBody)) {
       return res.status(400).send({
@@ -13,7 +16,7 @@ const createAuthor = async function (req, res) {
       });
     }
 
-    const { fname, lname, title, email, password } = requestBody;
+    const { fname, lname, title, email, password } = requestBody; //object destructuring
 
     if (!validator.isValid(fname)) {
       return res
@@ -36,7 +39,7 @@ const createAuthor = async function (req, res) {
     if (!validator.isValidTitle(title)) {
       return res.status(400).send({
         status: false,
-        message: `Title should Mr, Mrs, Miss `});
+        message: `Title should be Mr, Mrs, Miss`});
     }
 
     if (!validator.isValid(email)) {
@@ -45,13 +48,7 @@ const createAuthor = async function (req, res) {
         .send({ status: false, message: `Email is required` });
     }
 
-    // if (!email) {
-    //   res.status(400).send({
-    //     status: false,
-    //     message: `Email should be a valid email address`,
-    //   });
-    //   return;
-    // }
+  
     if(!validator.isValidEmail(email)){
       return res.status(400).send({status:false,msg:"Email address is not valid"})
     }
@@ -80,7 +77,7 @@ const createAuthor = async function (req, res) {
   } 
   catch (error) {
     return res.status(500).send({ status: false, Error: error.message });
-    console.log(error);
+    
   }
 };
 
@@ -89,7 +86,8 @@ const createAuthor = async function (req, res) {
 const loginAuthor = async function (req, res) {
   try {
     const requestBody = req.body;
-    if (!validator.isValidRequestBody(requestBody)) {
+
+    if(!validator.isValidRequestBody(requestBody)) {
       return res.status(400).send({
         status: false,
         message: "Invalid details please provide login details",
@@ -108,14 +106,6 @@ const loginAuthor = async function (req, res) {
       return res.send({status:false,msg:"Email should be valid"})
     }
 
-    // email = email.trim();
-    // if (!email) {
-    //   res.status(400).send({
-    //     status: false,
-    //     message: `Email should be a valid email address`,
-    //   });
-    //   return;
-    // }
     if (!validator.isValid(password)) {
       return res
         .status(400)
@@ -139,6 +129,7 @@ const loginAuthor = async function (req, res) {
       },
       "uranium"
     );
+    
     res.header("x-api-key", token);
 
     return res.status(200).send({

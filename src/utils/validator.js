@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 const isValid = function (value) {
   if (typeof value === "undefined" || value === null) return false;
@@ -15,14 +15,10 @@ const isValidRequestBody = function (requestBody) {
 };
 
 
-
-// const isValidString = function (value) {
-//   if (typeof value === "string" && value.trim().length === 0) return false;
-//   return true;
-// };
-
 const isValidEmail=function(email){
     let mailFormate=/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/
     return mailFormate.test(email);
 }
-module.exports = { isValid,isValidTitle,isValidRequestBody,isValidEmail}
+
+
+module.exports = { isValid,isValidTitle,isValidRequestBody,isValidEmail }
